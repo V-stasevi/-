@@ -2,6 +2,7 @@ import pygame
 
 from text import Text
 from constants import SIZE, BLACK
+from Grains import smallGrain, enegrizer
 
 
 class Game:
@@ -13,11 +14,13 @@ class Game:
 
     def prepare_scene(self):
         self.objects.append(Text(100, 100))
+        self.objects.append(smallGrain(456, 100))
+        self.objects.append(enegrizer(345, 435))
 
     def main_loop(self):
         while not self.gameover:  # Основной цикл
             self.process_events()
-            self.process_logic()
+        #    self.process_logic()
             self.process_drawing()
             pygame.time.wait(10)  # Ожидание отрисовки
 
