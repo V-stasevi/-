@@ -20,7 +20,7 @@ class Game:
     def main_loop(self):
         while not self.gameover:  # Основной цикл
             self.process_events()
-        #    self.process_logic()
+            #self.process_logic()
             self.process_drawing()
             pygame.time.wait(10)  # Ожидание отрисовки
 
