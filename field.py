@@ -2,7 +2,7 @@ from cell import Cell
 from wall_cell import WallCell
 
 
-# размер 31х28
+# размер 31х28,
 class Field:
     h_cells = 28
     v_cells = 31
