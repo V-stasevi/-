@@ -1,5 +1,5 @@
 import pygame
-import Constant
+import constants
 
 
 BigSeed = "img/BigSeed.jpg"
