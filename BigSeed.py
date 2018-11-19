@@ -11,15 +11,15 @@ class BigSeed:
         self.seed_rect.y = y                            #   Координат
         self.seed_rect = self.seed.get_rect()
         self.points = constants.POINTS_FOR_BIGSEED      # Количество очков за  большое зерно
-        self.isEaten = False                            # Изначально зерно не съедено
+        self.Eat = False                            # Изначально зерно не съедено
         self.pacman_rect = pacman_rect
 
     def eat(self):
-        if not self.isEaten:
+        if not self.Eat:
             if self.seed_rect.colliderect(pacman_rect):
-                self.isEaten = True
+                self.Eat = True
                 return self.points                      # Добавление очков
 
     def draw(self, screen):
-            if not self.isEaten:                        # Eсли зерно ещё не съедено,
-            screen.blit(self.grain, self.grain_rect)    # то происходит отрисовка зерна 
+            if not self.Eat:                        # Eсли зерно ещё не съедено,
+            screen.blit(self.seed, self.seed_rect)    # то происходит отрисовка зерна 
