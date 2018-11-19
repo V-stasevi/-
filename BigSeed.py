@@ -1,5 +1,5 @@
 import pygame
-import constants
+from constants import POINTS_FOR_BIGSEED
 
 
 BigSeed = "img/BigSeed.jpg"
