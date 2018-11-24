@@ -12,7 +12,6 @@ class Cell:
         self.width = cell_size
         self.height = cell_size
 
-
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, (self.x, self.y, self.width, self.height), self.fill)
         #print("drawing individual cell")

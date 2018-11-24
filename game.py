@@ -2,17 +2,14 @@ import pygame
 
 from text import Text
 from constants import SIZE, BLACK
+from field import Field
 
 
 class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode(SIZE)  # Установка размеров окна
         self.gameover = False
-        self.objects = []
-        self.prepare_scene()
-
-    def prepare_scene(self):
-        self.objects.append(Text(100, 100))
+        self.field = Field(1, 1, 16)
 
     def main_loop(self):
         while not self.gameover:  # Основной цикл
@@ -27,11 +24,9 @@ class Game:
                 self.gameover = True
 
     def process_logic(self):
-        for i in self.objects:
-            i.shift()
+        pass
 
     def process_drawing(self):
         self.screen.fill(BLACK)  # Заливка цветом
-        for i in self.objects:
-            i.draw(self.screen)
+        self.field.draw(self.screen)
         pygame.display.flip()  # Double buffering
