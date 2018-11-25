@@ -4,9 +4,6 @@ from class_ghost import Ghost
 from text import Text
 from constants import SIZE, BLACK
 from constants import picGhost_Blinky, picGhost_Clyde, picGhost_Inky, picGhost_Pinky
-
-#from constants import picGhost_Blinky_Move, picGhost_Clyde_Move, picGhost_Inky_Move, picGhost_Pinky_Move, picGhost_Dead_Move,
-
 from pacman import Pacman
 from field import Field
 
@@ -50,9 +47,8 @@ class Game:
     def process_logic(self):
 
         self.pacman.logic()
-        # for el in self.ghosts:
-        #     el.move()
-
+        for el in self.ghosts:
+            el.move()
 
     def process_drawing(self):
         self.screen.fill(BLACK)
