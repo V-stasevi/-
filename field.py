@@ -50,20 +50,13 @@ class Field:
     def __create_matrix(self):
         for i in range(self.v_cells):
             for j in range(self.h_cells):
-                if self.matrix[i][j] == 1:
+                cell_x = self.x + j * (self.cell_size + 1)
+                cell_y = self.y + i * (self.cell_size + 1)
+                if self.matrix[i][j]:
                     type = self.matrix[i][j]
-                    cell_x = self.x + j + j * self.cell_size
-                    cell_y = self.y + i + i * self.cell_size
                     cell = WallCell(cell_x, cell_y, self.cell_size, type)
-                elif self.matrix[i][j] == 0:
-                    cell_x = self.x + j + j * self.cell_size
-                    cell_y = self.y + i + i * self.cell_size
-                    cell = Cell(cell_x, cell_y, self.cell_size)
                 else:
-                    type = self.matrix[i][j]
-                    cell_x = self.x + j + j * self.cell_size
-                    cell_y = self.y + i + i * self.cell_size
-                    cell = WallCell(cell_x, cell_y, self.cell_size, type)
+                    cell = Cell(cell_x, cell_y, self.cell_size)
 
                 self.matrix[i][j] = cell
         return self.matrix
