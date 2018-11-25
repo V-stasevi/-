@@ -2,7 +2,7 @@ import pygame
 
 class Cell:
 
-    def __init__(self, x, y, cell_size=9):
+    def __init__(self, x, y, cell_size=16):
         self.x = x
         self.y = y
         self.color = 0,0,0
