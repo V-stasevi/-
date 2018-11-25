@@ -11,6 +11,7 @@ class Game:
         self.gameover = False
         self.objects = []
         self.prepare_scene()
+        self.field = Field(20, 20)
 
     def prepare_scene(self):
         self.objects.append(Text(100, 100))
