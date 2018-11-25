@@ -1,6 +1,7 @@
 import pygame
 
-from constants import SIZE, BLACK, MATRIX
+from text import Text
+from constants import SIZE, BLACK
 #from pacman import Pacman
 from field import Field
 
@@ -9,15 +10,20 @@ class Game:
     def __init__(self):
         self.screen = pygame.display.set_mode(SIZE)
         self.gameover = False
+        self.objects = []
+        self.prepare_scene()
         #self.pacman = Pacman()
-        self.field = Field(1, 1, 15)
+        self.field = Field(20, 20)
+
+    def prepare_scene(self):
+        self.objects.append(Text(100, 100))
 
     def main_loop(self):
         while not self.gameover:
             self.process_events()
             self.process_logic()
             self.process_drawing()
-            pygame.time.wait(225)
+            pygame.time.wait(10)
 
     def process_events(self):
         for event in pygame.event.get():  # Получение всех событий
@@ -31,6 +37,6 @@ class Game:
 
     def process_drawing(self):
         self.screen.fill(BLACK)
-        self.field.draw(self.screen)
+        self.field.draw(self.screen)#What?
         #self.pacman.draw(self.screen)
         pygame.display.flip()
