@@ -2,6 +2,7 @@ import pygame
 
 from text import Text
 from constants import SIZE, BLACK
+from field import Field
 
 
 class Game:
@@ -32,6 +33,7 @@ class Game:
 
     def process_drawing(self):
         self.screen.fill(BLACK)  # Заливка цветом
+
         for i in self.objects:
             i.draw(self.screen)
         pygame.display.flip()  # Double buffering
