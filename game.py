@@ -1,7 +1,11 @@
 import pygame
 
+from class_ghost import Ghost
 from text import Text
 from constants import SIZE, BLACK
+from constants import picGhost_Blinky, picGhost_Clyde, picGhost_Inky, picGhost_Pinky
+
+#from constants import picGhost_Blinky_Move, picGhost_Clyde_Move, picGhost_Inky_Move, picGhost_Pinky_Move, picGhost_Dead_Move,
 
 from pacman import Pacman
 from field import Field
@@ -17,6 +21,13 @@ class Game:
         self.prepare_scene()
         self.pacman = Pacman()
         self.field = Field(20, 20)
+
+        ghost_x = 30  # Изначальный х приведений
+        self.Blinky = Ghost(picGhost_Blinky, ghost_x)      # добавление Блинки
+        self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
+        self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
+        self.Pinky = Ghost(picGhost_Pinky, ghost_x + 90)   # добавление Пинки
+        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]
 
     def prepare_scene(self):
         self.objects.append(Text(100, 100))
@@ -37,11 +48,17 @@ class Game:
             self.pacman.check_event(event)
 
     def process_logic(self):
+
         self.pacman.logic()
-        pass
+        # for el in self.ghosts:
+        #     el.move()
+
 
     def process_drawing(self):
         self.screen.fill(BLACK)
         self.field.draw(self.screen)
         self.pacman.draw(self.screen)
+        for item in self.ghosts:
+            item.draw(self.screen)
         pygame.display.flip()
+
