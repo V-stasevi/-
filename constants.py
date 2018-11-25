@@ -4,6 +4,7 @@ SIZE = WIDTH, HEIGHT
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
 POINTS_FOR_SEED = 10
+POINTS_FOR_BIGSEED = 100
 MATRIX = [[7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13],
               [12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11],
               [12, 0, 2, 4, 4, 6, 0, 2, 4, 4, 4, 6, 0, 11, 12, 0, 2, 4, 4, 4, 6, 0, 2, 4, 4, 6, 0, 11],
@@ -53,4 +54,5 @@ picGhost_Clyde_Move = "images/Ghost-Clyde-move.png"
 picGhost_Inky_Move = "images/Ghost-Inky-move.png"
 picGhost_Pinky_Move = "images/Ghost-Pinky-move.png"
 picGhost_Dead_Move = "images/Ghost-dead-move.png"
+
 
