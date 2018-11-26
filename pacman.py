@@ -24,6 +24,8 @@ pac_right = "images/tmp_pacman_right.png"  # !! Временные картин�
 pac_left = "images/tmp_pacman_left.png"
 pac_down = "images/tmp_pacman_down.png"
 pac_up = "images/tmp_pacman_up.png"
+common = True
+fear = False
 
 
 class Pacman:
@@ -35,6 +37,7 @@ class Pacman:
         self.__update_system_position()
         self.direction = 0      # 0 - > | 1 - v | 2 - < | 3 - ^  -- направления движения
         self.cash = 0
+        self.state = common     # Должно передаваться в функции eat класса большого зерна и столкновения с привидением
 
     def __update_system_position(self):
         self.rect.x = self.x
