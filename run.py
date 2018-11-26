@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import pygame
 import sys
 
@@ -7,8 +5,8 @@ from game import Game
 
 
 def main():
-    pygame.init()  # Инициализация библиотеки
-    pygame.font.init()  # Инициализация библиотеки для работы с текстом
+    pygame.init()
+    pygame.font.init()
     g = Game()
     g.main_loop()
     sys.exit()
