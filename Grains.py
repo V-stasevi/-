@@ -20,10 +20,9 @@ class smallGrain:
         self.grain = pygame.image.load(smallSeedTexture)
         self.grain_rect = self.grain.get_rect()
         self.points = constants.POINTS_FOR_SEED
-        self.grain_rect.x = x
-        self.grain_rect.y = y
+        self.grain_rect.x = x+2
+        self.grain_rect.y = y+2
         self.isEaten = False
-
 
     def eat(self):
         if not self.isEaten:
