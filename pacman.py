@@ -30,11 +30,11 @@ class Pacman:
     def __init__(self):
         self.image = pygame.image.load(pac_right)
         self.rect = self.image.get_rect()
-        self.x = 15*16
-        self.y = 16*16
+        self.x = 14*16+2
+        self.y = 15*16
         self.__update_system_position()
         self.direction = 0      # 0 - > | 1 - v | 2 - < | 3 - ^  -- направления движения
-        self.cash = 0
+        self.cash = 3
 
     def __update_system_position(self):
         self.rect.x = self.x
@@ -94,8 +94,8 @@ class Pacman:
 
         if self.direction == 2 and self.x > 0 and MATRIX[int(self.y/16)][int(self.x/16)-1] == 0:
             self.x -= 16
-        if self.direction == 2 and self.y/16 == 14 and self.x/16 == 0:
-            self.x = WIDTH
+        if self.direction == 2 and self.y/16 == 14 and (self.x-2)/16 == 0:
+            self.x = 27*16
             self.y = 16*14
 
         if self.direction == 3 and self.y > 0 and MATRIX[int(self.y/16)-1][int(self.x/16)] == 0:

@@ -16,18 +16,18 @@ energizerTexture = "textures/big_seed.png"
 
 
 class smallGrain:
-    def __init__(self,x, y, pacman_rect):
+    def __init__(self,x, y):
         self.grain = pygame.image.load(smallSeedTexture)
         self.grain_rect = self.grain.get_rect()
         self.points = constants.POINTS_FOR_SEED
         self.grain_rect.x = x
         self.grain_rect.y = y
         self.isEaten = False
-        self.pacman_rect = pacman_rect
+
 
     def eat(self):
         if not self.isEaten:
-            if self.grain_rect.colliderect(pacman_rect):
+            if self.grain_rect.colliderect(self.pacman_rect):
                 self.isEaten = True
                 return self.points                      # Добавление очков, так же можно потом переделать.
 

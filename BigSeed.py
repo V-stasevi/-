@@ -22,4 +22,4 @@ class BigSeed:
 
     def draw(self, screen):
             if not self.Eat:                        # Eсли зерно ещё не съедено,
-            screen.blit(self.seed, self.seed_rect)    # то происходит отрисовка зерна 
+                screen.blit(self.seed, self.seed_rect)    # то происходит отрисовка зерна

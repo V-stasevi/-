@@ -15,26 +15,21 @@ class Game:
         self.screen = pygame.display.set_mode(SIZE)
         self.gameover = False
         self.objects = []
-        self.prepare_scene()
+        #self.prepare_scene()
         self.pacman = Pacman()
-        self.field = Field(20, 20)
-
+        self.field = Field(0, 0, 15)
+        '''
         ghost_x = 30  # Изначальный х приведений
         self.Blinky = Ghost(picGhost_Blinky, ghost_x)      # добавление Блинки
         self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
         self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
         self.Pinky = Ghost(picGhost_Pinky, ghost_x + 90)   # добавление Пинки
-        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]
-
-    def prepare_scene(self):
-        self.objects.append(Text(100, 100))
-        self.objects.append(smallGrain(456, 100))
-        self.objects.append(enegrizer(345, 435))
+        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]'''
 
     def main_loop(self):
         while not self.gameover:
             self.process_events()
-            #self.process_logic()
+            self.process_logic()
             self.process_drawing()
             pygame.time.wait(150)
 
@@ -47,14 +42,24 @@ class Game:
     def process_logic(self):
 
         self.pacman.logic()
-        for el in self.ghosts:
-            el.move()
+        #for el in self.ghosts:
+            #el.move()
 
     def process_drawing(self):
         self.screen.fill(BLACK)
         self.field.draw(self.screen)
         self.pacman.draw(self.screen)
-        for item in self.ghosts:
-            item.draw(self.screen)
+        #for item in self.ghosts:
+            #item.draw(self.screen)
         pygame.display.flip()
 
+    def pacman_rect(self):
+        return self.pacman.rect
+'''     
+    def prepare_scene(self):
+        self.objects.append(Text(100, 100))
+        self.objects.append(smallGrain(456, 100))
+        self.objects.append(enegrizer(345, 435))
+
+
+'''
