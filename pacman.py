@@ -95,7 +95,7 @@ class Pacman:
         if self.direction == 2 and self.x > 0 and MATRIX[int(self.y/16)][int(self.x/16)-1] == 0:
             self.x -= 16
         if self.direction == 2 and self.y/16 == 14 and self.x/16 == 0:
-            self.x = WIDTH
+            self.x = WIDTH-16
             self.y = 16*14
 
         if self.direction == 3 and self.y > 0 and MATRIX[int(self.y/16)-1][int(self.x/16)] == 0:
