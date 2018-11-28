@@ -1,8 +1,21 @@
 import pygame
+from button import Button
 
 from text import Text
 from constants import SIZE, BLACK
 
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+BLACK = (0,0,0)
+WHITE = (255,255,255)
+ORANGE = (255,180,0)
+
+BUTTON_STYLE = {"hover_color" : BLUE,
+                "clicked_color" : GREEN,
+                "clicked_font_color" : BLACK,
+                "hover_font_color" : ORANGE
+                }
 
 class Game:
     def __init__(self):
@@ -10,6 +23,8 @@ class Game:
         self.gameover = False
         self.objects = []
         self.prepare_scene()
+
+        self.settings_button = Button((5, 5, 50, 50), RED, self.show_settings_screen, text="he", **BUTTON_STYLE)
 
     def prepare_scene(self):
         self.objects.append(Text(100, 100))
@@ -34,4 +49,13 @@ class Game:
         self.screen.fill(BLACK)  # Заливка цветом
         for i in self.objects:
             i.draw(self.screen)
+
+        self.settings_button.update(self.screen)  # drawing settings button
+
         pygame.display.flip()  # Double buffering
+
+
+
+
+    def show_settings_screen(self):
+        print('settings screen reached')

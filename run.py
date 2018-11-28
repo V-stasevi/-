@@ -11,6 +11,7 @@ def main():
     pygame.font.init()  # Инициализация библиотеки для работы с текстом
     g = Game()
     g.main_loop()
+    print('yes')
     sys.exit()
 
 
