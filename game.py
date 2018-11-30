@@ -1,30 +1,25 @@
 import pygame
-from button import Button
+from settings_control import ButtonControl
 
 from text import Text
-from constants import SIZE, BLACK
+from constants import SIZE, BLACK, BUTTON_STYLE_REGULAR
 
-RED = (255,0,0)
-BLUE = (0,0,255)
-GREEN = (0,255,0)
-BLACK = (0,0,0)
-WHITE = (255,255,255)
-ORANGE = (255,180,0)
-
-BUTTON_STYLE = {"hover_color" : BLUE,
-                "clicked_color" : GREEN,
-                "clicked_font_color" : BLACK,
-                "hover_font_color" : ORANGE
-                }
 
 class Game:
+
     def __init__(self):
         self.screen = pygame.display.set_mode(SIZE)  # Установка размеров окна
         self.gameover = False
         self.objects = []
         self.prepare_scene()
 
-        self.settings_button = Button((5, 5, 50, 50), RED, self.show_settings_screen, text="he", **BUTTON_STYLE)
+        self.dict_functions = {"sound_control": self.turn_off_music,
+                                "level_control": self.change_game_level,
+                                "records_control": self.clear_records,
+                          }
+
+        self.settings_control = ButtonControl(self.screen, self.dict_functions)
+
 
     def prepare_scene(self):
         self.objects.append(Text(100, 100))
@@ -41,6 +36,10 @@ class Game:
             if event.type == pygame.QUIT:  # Событие выхода
                 self.gameover = True
 
+            self.settings_control.check_control_button_event(event)
+
+
+
     def process_logic(self):
         for i in self.objects:
             i.shift()
@@ -50,12 +49,32 @@ class Game:
         for i in self.objects:
             i.draw(self.screen)
 
-        self.settings_button.update(self.screen)  # drawing settings button
-
+        self.settings_control.draw_control_button()
         pygame.display.flip()  # Double buffering
 
 
+    def turn_off_music(self, result):
+        #logic to turn off/on music
+        '''
+        if music class.is_playing:
+            print("turning music off")
+        else:
+            print("turning music on")
+        music class.is_playing = not music class.is_playing
+        '''
+
+    def change_game_level(self, result):
+        #logic to change the level accordingly
+        if result == 1:
+            print("change level to 1")
+        elif result == 2:
+            print("change level to 2")
+        elif result == 3:
+            print("change level to 3")
+        else:
+            print("hmmm, unexpected level")
 
 
-    def show_settings_screen(self):
-        print('settings screen reached')
+    def clear_records(self, result):
+        # logic to clear records
+        print("clearing records")
