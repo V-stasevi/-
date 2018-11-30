@@ -28,6 +28,7 @@ class ButtonControl:
         self.buttons = self._append_buttons()
 
 
+
     def draw(self, surface):
         self.control_screen.fill((BLACK))
 
@@ -35,8 +36,6 @@ class ButtonControl:
             self.buttons[i].update(self.control_screen)
 
         self.control_screen.blit(self.image, self.image_rect)
-
-
         self.parent_surface.blit(self.control_screen, (0, 0))
         self.draw_control_button()
 

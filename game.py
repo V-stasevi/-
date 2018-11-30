@@ -2,7 +2,7 @@ import pygame
 from settings_control import ButtonControl
 
 from text import Text
-from constants import SIZE, BLACK, BUTTON_STYLE_REGULAR
+from constants import SIZE, BLACK
 
 
 class Game:
