@@ -18,13 +18,13 @@ class Game:
         #self.prepare_scene()
         self.pacman = Pacman()
         self.field = Field(0, 0, 15)
-        '''
+
         ghost_x = 30  # Изначальный х приведений
         self.Blinky = Ghost(picGhost_Blinky, ghost_x)      # добавление Блинки
         self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
         self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
         self.Pinky = Ghost(picGhost_Pinky, ghost_x + 90)   # добавление Пинки
-        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]'''
+        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]
 
     def main_loop(self):
         while not self.gameover:

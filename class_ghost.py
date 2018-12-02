@@ -4,7 +4,7 @@ from constants import picGhost_Dead
 
 
 class Ghost:
-    def __init__(self, picture, x, y=30):
+    def __init__(self, picture, x, y=15*16):
         self.image = pygame.image.load(picture)
         self.rect = self.image.get_rect()
         self.x = x
