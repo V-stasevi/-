@@ -1,14 +1,15 @@
 import pygame
-
 from constants import picGhost_Dead
 
+common = True
 
 class Ghost:
-    def __init__(self, picture, x, y=15*16):
-        self.image = pygame.image.load(picture)
+    def __init__(self, picture, x):
+        self.image = picture
         self.rect = self.image.get_rect()
         self.x = x
-        self.y = y
+        self.y = 15*16
+        self.state = common
         self.__update_system_position()
         self.dead = False
 
@@ -19,9 +20,6 @@ class Ghost:
     def is_dead(self):
         self.image = pygame.image.load(picGhost_Dead)
 
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)
-
     def move(self):
         pass
 
@@ -29,6 +27,6 @@ class Ghost:
         pass
 
     def logic(self, window_width, window_height):
-        self.move()
-        self.check_border(window_width, window_height)
+
         self.__update_system_position()
+

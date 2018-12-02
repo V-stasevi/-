@@ -3,9 +3,11 @@ import pygame
 from class_ghost import Ghost
 from text import Text
 from constants import SIZE, BLACK
-from constants import picGhost_Blinky, picGhost_Clyde, picGhost_Inky, picGhost_Pinky
+from constants import picGhost_Clyde, picGhost_Inky
 from pacman import Pacman
 from field import Field
+from blinky import Blinky
+from pinky import Pinky
 
 from Grains import smallGrain, enegrizer
 
@@ -20,10 +22,10 @@ class Game:
         self.field = Field(0, 0, 15)
 
         ghost_x = 30  # Изначальный х приведений
-        self.Blinky = Ghost(picGhost_Blinky, ghost_x)      # добавление Блинки
+        self.Blinky = Blinky(self.pacman)   # добавление Блинки
         self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
         self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
-        self.Pinky = Ghost(picGhost_Pinky, ghost_x + 90)   # добавление Пинки
+        self.Pinky = Pinky(self.pacman)   # добавление Пинки
         self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]
 
     def main_loop(self):
@@ -40,17 +42,16 @@ class Game:
             self.pacman.check_event(event)
 
     def process_logic(self):
-
         self.pacman.logic()
-        #for el in self.ghosts:
-            #el.move()
+        self.Blinky.move()
+        self.Pinky.move()
 
     def process_drawing(self):
         self.screen.fill(BLACK)
         self.field.draw(self.screen)
         self.pacman.draw(self.screen)
-        #for item in self.ghosts:
-            #item.draw(self.screen)
+        self.Blinky.draw(self.screen)
+        self.Pinky.draw(self.screen)
         pygame.display.flip()
 
     def pacman_rect(self):
