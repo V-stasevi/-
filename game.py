@@ -1,4 +1,5 @@
 import pygame
+from settings_control import ButtonControl
 
 from class_ghost import Ghost
 from text import Text
@@ -13,22 +14,24 @@ from Grains import smallGrain, enegrizer
 
 
 class Game:
+
     def __init__(self):
         self.screen = pygame.display.set_mode(SIZE)
         self.gameover = False
         self.isMenu = True
         self.objects = []
-        #self.prepare_scene()
+        self.menu = Menu.Menu(self.screen, cm.pic_play, cm.pic_records, cm.pic_options, cm.pic_bg, self.runGame,
+                              self.showScore, self.showOption)
         self.pacman = Pacman()
         self.field = Field(0, 0, 15)
-        self.menu = Menu.Menu(self.screen, cm.pic_play, cm.pic_records, cm.pic_options, cm.pic_bg, self.runGame, self.showScore, self.showOption)
-        '''
-        ghost_x = 30  # Изначальный х приведений
-        self.Blinky = Ghost(picGhost_Blinky, ghost_x)      # добавление Блинки
-        self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
-        self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
-        self.Pinky = Ghost(picGhost_Pinky, ghost_x + 90)   # добавление Пинки
-        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]'''
+        self.prepare_scene()
+
+        self.dict_functions = {"sound_control": self.turn_off_music,
+                                "level_control": self.change_game_level,
+                                "records_control": self.clear_records,
+                          }
+
+        self.settings_control = ButtonControl(self.screen, self.dict_functions)
 
     def main_loop(self):
         while not self.gameover:
@@ -58,6 +61,8 @@ class Game:
         self.screen.fill(BLACK)
         if self.isMenu:
             self.menu.draw(self.screen)
+            for i in self.objects:
+                i.draw(self.screen)
         else:
             self.field.draw(self.screen)
             self.pacman.draw(self.screen)
@@ -74,10 +79,38 @@ class Game:
         self.screen = pygame.display.set_mode(SIZE_B)
 
     def showScore(self):
-        print("show score")
+        print('showScore')
 
     def showOption(self):
-        print("show option")
+        self.settings_control.main_loop()
+
+
+    def turn_off_music(self, result):
+        #logic to turn off/on music
+        '''
+        if music class.is_playing:
+            print("turning music off")
+        else:
+            print("turning music on")
+        music class.is_playing = not music class.is_playing
+        '''
+        pass
+
+    def change_game_level(self, result):
+        #logic to change the level accordingly
+        if result == 1:
+            print("change level to 1")
+        elif result == 2:
+            print("change level to 2")
+        elif result == 3:
+            print("change level to 3")
+        else:
+            print("hmmm, unexpected level")
+
+
+    def clear_records(self, result):
+        # logic to clear records
+        print("clearing records")
 
 '''     
     def prepare_scene(self):

@@ -1,11 +1,24 @@
-WIDTH = 600
-HEIGHT = 500
+import pygame
+pygame.font.init()
+
+WIDTH = 800
+HEIGHT = 600
 SIZE = WIDTH, HEIGHT
+
 WIDTH_B = 16*28
 HEIGHT_B = 500
 SIZE_B = WIDTH_B, HEIGHT_B
+
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
+RED = (255,0,0)
+BLUE = (0,0,255)
+GREEN = (0,255,0)
+ORANGE = (255,180,0)
+GRAY = 70, 70, 70
+YELLOW = 245, 184, 40
+
+
 POINTS_FOR_SEED = 10
 POINTS_FOR_BIGSEED = 100
 MATRIX = [[7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13],
@@ -63,3 +76,9 @@ x_records, y_records = WIDTH/2, HEIGHT/5 * 3
 x_options, y_options = WIDTH/2, HEIGHT/5 * 4
 pic_play, pic_records, pic_options, pic_bg = "images/Play.png", "images/Records.png", "images/Options.png", "images/Menu.png"
 pic_arr = "images/Ar.png"
+
+
+BUTTON_STYLE = {
+                "font" : pygame.font.SysFont("Alice", 18),
+                "hover_color" : GRAY,
+                }
