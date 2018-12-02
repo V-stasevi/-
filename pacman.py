@@ -85,7 +85,6 @@ class Pacman:
             self.image = pygame.image.load(pac_up)
 
     def move(self):
-        print(self.y/16, self.x/16)
         if self.direction == 0 and self.x+16 < WIDTH and MATRIX[int(self.y/16)][int(self.x/16)+1] == 0:
             self.x += 16
         if self.direction == 0 and self.y/16 == 14 and self.x/16 == 27:
