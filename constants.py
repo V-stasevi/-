@@ -6,7 +6,7 @@ HEIGHT = 600
 SIZE = WIDTH, HEIGHT
 
 WIDTH_B = 16*28
-HEIGHT_B = 500
+HEIGHT_B = 16*30 + 30
 SIZE_B = WIDTH_B, HEIGHT_B
 
 BLACK = 0, 0, 0
@@ -74,7 +74,7 @@ picGhost_Dead_Move = "images/Ghost-dead-move.png"
 x_play, y_play = WIDTH/2, HEIGHT/5 * 2
 x_records, y_records = WIDTH/2, HEIGHT/5 * 3
 x_options, y_options = WIDTH/2, HEIGHT/5 * 4
-pic_play, pic_records, pic_options, pic_bg = "images/Play.png", "images/Records.png", "images/Options.png", "images/Menu.png"
+pic_play, pic_records, pic_options, pic_bg = "textures/Play.png", "textures/Records.png", "textures/Options.png", "textures/Menu.png"
 pic_arr = "images/Ar.png"
 
 

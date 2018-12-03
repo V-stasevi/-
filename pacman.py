@@ -18,7 +18,7 @@
 """
 
 import pygame
-from constants import WIDTH, HEIGHT, MATRIX
+from constants import WIDTH, HEIGHT, MATRIX, POINTS_FOR_SEED
 
 pac_right = "pac-img.png"  # !! Временные картинки Пакмана. НУЖНО ЗАМЕНИТЬ
 pac_left = "pac-img.png"
@@ -29,7 +29,7 @@ fear = False
 
 
 class Pacman:
-    def __init__(self):
+    def __init__(self, mat):
         self.image = pygame.image.load(pac_right)
         self.rect = self.image.get_rect()
         self.x = 14*16+2
@@ -38,6 +38,7 @@ class Pacman:
         self.direction = 0      # 0 - > | 1 - v | 2 - < | 3 - ^  -- направления движения
         self.cash = 3
         self.state = common
+        self.matrix = mat
 
     def __update_system_position(self):
         self.rect.x = self.x
@@ -103,9 +104,14 @@ class Pacman:
         if self.direction == 3 and self.y > 0 and MATRIX[int(self.y//16)-1][int(self.x//16)] == 0:
             self.y -= 16
 
-    def logic(self):
+    def eatGrain(self, score):
+        if self.matrix[self.y//16][self.x//16].grain.isEaten == False:
+            self.matrix[self.y//16][self.x//16].grain.isEaten = True
+
+    def logic(self, score):
         self.check_cash()
         self.move()
+        self.eatGrain(score)
         self.__update_system_position()
 
     def draw(self, screen):

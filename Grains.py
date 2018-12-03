@@ -20,15 +20,18 @@ class smallGrain:
         self.grain = pygame.image.load(smallSeedTexture)
         self.grain_rect = self.grain.get_rect()
         self.points = constants.POINTS_FOR_SEED
-        self.grain_rect.x = x+2
-        self.grain_rect.y = y+2
+        self.grain_rect.x = x + 2
+        self.grain_rect.y = y + 2
         self.isEaten = False
 
-    def eat(self):
+    def eat(self, pacman_rect):
         if not self.isEaten:
-            if self.grain_rect.colliderect(self.pacman_rect):
-                self.isEaten = True
-                return self.points                      # Добавление очков, так же можно потом переделать.
+            if pacman_rect.colliderect(self.grain_rect):
+                print(True)
+                self.isEaten = True    # Добавление очков, так же можно потом переделать.
+            else:
+                print(False)
+
 
     def draw(self, screen):
         if self.isEaten:

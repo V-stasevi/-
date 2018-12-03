@@ -20,10 +20,12 @@ class Game:
         self.gameover = False
         self.isMenu = True
         self.objects = []
+        self.score = 0
+        self.count = 0
         self.menu = Menu.Menu(self.screen, cm.pic_play, cm.pic_records, cm.pic_options, cm.pic_bg, self.runGame,
                               self.showScore, self.showOption)
-        self.pacman = Pacman()
         self.field = Field(0, 0, 15)
+        self.pacman = Pacman(self.field.matrix)
         self.prepare_scene()
 
         self.dict_functions = {"sound_control": self.turn_off_music,
@@ -53,9 +55,7 @@ class Game:
                 self.menu.events(event)
 
     def process_logic(self):
-        self.pacman.logic()
-        #for el in self.ghosts:
-            #el.move()
+        self.pacman.logic(self.score)
 
     def process_drawing(self):
         self.screen.fill(BLACK)
@@ -111,6 +111,7 @@ class Game:
     def clear_records(self, result):
         # logic to clear records
         print("clearing records")
+
 
 '''     
     def prepare_scene(self):
