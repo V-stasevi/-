@@ -22,6 +22,8 @@ class Blinky:
         else:
             return True
 
+    def set_speed(self, new_speed):
+        self.speed = new_speed
 
     def state(self):
         pass
