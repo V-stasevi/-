@@ -29,16 +29,17 @@ fear = False
 
 
 class Pacman:
-    def __init__(self, mat):
+    def __init__(self, mat, sounds):
         self.image = pygame.image.load(pac_right)
         self.rect = self.image.get_rect()
         self.x = 14*16+2
-        self.y = 15*16
+        self.y = 12*16
         self.__update_system_position()
         self.direction = 0      # 0 - > | 1 - v | 2 - < | 3 - ^  -- направления движения
         self.cash = 3
         self.state = common
         self.matrix = mat
+        self.sounds = sounds
 
     def __update_system_position(self):
         self.rect.x = self.x
@@ -107,6 +108,9 @@ class Pacman:
     def eatGrain(self, score):
         if self.matrix[self.y//16][self.x//16].grain.isEaten == False:
             self.matrix[self.y//16][self.x//16].grain.isEaten = True
+            if score != 3000:
+                score.pointsGrains += POINTS_FOR_SEED
+                self.sounds.playEatSeedSound()
 
     def logic(self, score):
         self.check_cash()

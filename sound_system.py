@@ -23,25 +23,32 @@ class Sounds:
         self.extraPacmanSound = pygame.mixer.Sound('sounds/pacman_extrapac.wav')
         self.intermissionSound = pygame.mixer.Sound('sounds/pacman_intermission.wav')
         self.deathSound = pygame.mixer.Sound('sounds/pacman_death.wav')
-        self.updateVolume(volume)
+        self.volume = volume
+        self.updateVolume(self.volume)
 
     def playEatSeedSound(self, loops=1):
-        self.eatSeedSound.play(loops-1)
+        if not pygame.mixer.get_busy():
+            self.eatSeedSound.play(loops-1)
 
     def playEatFruitSound(self, loops=1):
-        self.eatFruitSound.play(loops-1)
+        if not pygame.mixer.get_busy():
+            self.eatFruitSound.play(loops-1)
 
     def playEatGhostSound(self, loops=1):
-        self.eatGhostSound.play(loops-1)
+        if not pygame.mixer.get_busy():
+            self.eatGhostSound.play(loops-1)
 
     def playExtraPacmanSound(self, loops=1):
-        self.extraPacmanSound.play(loops-1)
+        if not pygame.mixer.get_busy():
+            self.extraPacmanSound.play(loops-1)
 
     def playIntermissionSound(self, loops=1):
-        self.intermissionSound.play(loops-1)
+        if not pygame.mixer.get_busy():
+            self.intermissionSound.play(loops-1)
 
     def playDeathSound(self, loops=1):
-        self.deathSound.play(loops-1)
+        if not pygame.mixer.get_busy():
+            self.deathSound.play(loops-1)
 
     def updateVolume(self, volume):
         self.eatSeedSound.set_volume(volume)

@@ -1,17 +1,14 @@
 import pygame
 from settings_control import ButtonControl
 
-from class_ghost import Ghost
-from text import Text
 from constants import SIZE, BLACK, SIZE_B
-from constants import picGhost_Blinky, picGhost_Clyde, picGhost_Inky, picGhost_Pinky
 from pacman import Pacman
 from field import Field
 import Menu
 import constants as cm
+from score import Score
 
-from Grains import smallGrain, enegrizer
-
+from sound_system import Sounds
 
 class Game:
 
@@ -20,13 +17,17 @@ class Game:
         self.gameover = False
         self.isMenu = True
         self.objects = []
-        self.score = 0
-        self.count = 0
+        self.score = -40
+
+        self.sounds = Sounds()
         self.menu = Menu.Menu(self.screen, cm.pic_play, cm.pic_records, cm.pic_options, cm.pic_bg, self.runGame,
                               self.showScore, self.showOption)
         self.field = Field(0, 0, 15)
-        self.pacman = Pacman(self.field.matrix)
-        self.prepare_scene()
+        self.pacman = Pacman(self.field.matrix, self.sounds)
+        self.score = Score(15, 35, self.screen)
+
+
+        # self.prepare_scene()
 
         self.dict_functions = {"sound_control": self.turn_off_music,
                                 "level_control": self.change_game_level,
@@ -36,14 +37,12 @@ class Game:
         self.settings_control = ButtonControl(self.screen, self.dict_functions)
 
     def main_loop(self):
+        self.sounds.playIntroSound()
         while not self.gameover:
             self.process_events()
             self.process_logic()
             self.process_drawing()
             pygame.time.wait(150)
-
-    def prepare_scene(self):
-        pass
 
     def process_events(self):
         for event in pygame.event.get():
@@ -55,17 +54,20 @@ class Game:
                 self.menu.events(event)
 
     def process_logic(self):
-        self.pacman.logic(self.score)
+        if self.isMenu:
+            pass
+        else:
+            self.pacman.logic(self.score)
+            print(self.score.pointsGrains)
 
     def process_drawing(self):
         self.screen.fill(BLACK)
         if self.isMenu:
             self.menu.draw(self.screen)
-            for i in self.objects:
-                i.draw(self.screen)
         else:
             self.field.draw(self.screen)
             self.pacman.draw(self.screen)
+            self.score.draw()
 
         #for item in self.ghosts:
             #item.draw(self.screen)
@@ -86,15 +88,10 @@ class Game:
 
 
     def turn_off_music(self, result):
-        #logic to turn off/on music
-        '''
-        if music class.is_playing:
-            print("turning music off")
+        if self.sounds.volume == 1:
+            self.sounds.updateVolume(0)
         else:
-            print("turning music on")
-        music class.is_playing = not music class.is_playing
-        '''
-        pass
+            self.sounds.updateVolume(1)
 
     def change_game_level(self, result):
         #logic to change the level accordingly
@@ -111,13 +108,3 @@ class Game:
     def clear_records(self, result):
         # logic to clear records
         print("clearing records")
-
-
-'''     
-    def prepare_scene(self):
-        self.objects.append(Text(100, 100))
-        self.objects.append(smallGrain(456, 100))
-        self.objects.append(enegrizer(345, 435))
-
-
-'''
