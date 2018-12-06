@@ -23,10 +23,10 @@ class Game:
 
         ghost_x = 30  # Изначальный х приведений
         self.Blinky = Blinky(self.pacman)   # добавление Блинки
-        self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
-        self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
+        #self.Clyde = Ghost(picGhost_Clyde, ghost_x + 30)   # добавление Клайда
+        #self.Inky = Ghost(picGhost_Inky, ghost_x + 60)     # добавление Инки
         self.Pinky = Pinky(self.pacman)   # добавление Пинки
-        self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]
+        #self.ghosts = [self.Blinky, self.Clyde, self.Inky, self.Pinky]
 
     def main_loop(self):
         while not self.gameover:

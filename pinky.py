@@ -28,24 +28,24 @@ class Pinky:
         pass
 
     def turn(self):
-        if self.check_boarder() == 0:
-            if self.direction == up or self.direction == down:
 
-                turn_left = abs(self.pacman.x - self.pinky.x - 16)
-                turn_right = abs(self.pacman.x - self.pinky.x + 16)
-                if turn_left <= turn_right:
-                    self.direction = left
-                else:
-                    self.direction = right
+        if self.direction == up or self.direction == down:
 
-            elif self.direction == right or self.direction == left:
+            turn_left = abs(self.pacman.x + 4 - self.pinky.x - 16)
+            turn_right = abs(self.pacman.x + 4- self.pinky.x + 16)
+            if turn_left >= turn_right:
+                self.direction = left
+            else:
+                self.direction = right
 
-                turn_up = abs(self.pacman.y - self.pinky.y + 16)
-                turn_down = abs(self.pacman.y - self.pinky.y - 16)
-                if turn_up <= turn_down:
-                    self.direction = up
-                else:
-                    self.direction = down
+        elif self.direction == right or self.direction == left:
+
+            turn_up = abs(self.pacman.y + 4 - self.pinky.y - 16)
+            turn_down = abs(self.pacman.y + 4 - self.pinky.y + 16)
+            if turn_up <= turn_down:
+                self.direction = up
+            else:
+                self.direction = down
 
     def move_straight(self):
         if self.direction == up:
@@ -62,12 +62,17 @@ class Pinky:
             self.move_straight()
         elif self.check_boarder() == 0:
             self.turn()
+        self.__update_system_position()
+
+    def __update_system_position(self):
+        self.pinky.rect.x = self.pinky.x
+        self.pinky.rect.y = self.pinky.y
 
     def draw(self, screen):
         screen.blit(self.pinky.image, self.pinky.rect)
 
-    def image_loop(self):
-        if self.pinky.image == picGhost_Pinky:
-            self.pinky.image == picGhost_Pinky_Move
-        else:
-            self.pinky.image == picGhost_Pinky
+    # def image_loop(self):
+    #     if self.pinky.image == picGhost_Pinky:
+    #         self.pinky.image == picGhost_Pinky_Move
+    #     else:
+    #         self.pinky.image == picGhost_Pinky

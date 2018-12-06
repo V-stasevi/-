@@ -6,7 +6,7 @@ class Blinky:
     def __init__(self, pacman):
 
         self.image = picGhost_Blinky
-        self.blinky = Ghost(self.image, 15 * 16 - 20)
+        self.blinky = Ghost(self.image, 15 * 16 - 32)
         self.direction = down
         self.pacman = pacman
         self.speed = 16
@@ -29,24 +29,24 @@ class Blinky:
         pass
 
     def turn(self):
-        if self.check_boarder() == 0:
-            if self.direction == up or self.direction == down:
+        if self.direction == up or self.direction == down:
 
-                turn_left = abs(self.pacman.x - self.blinky.x - 16)
-                turn_right = abs(self.pacman.x - self.blinky.x + 16)
-                if turn_left <= turn_right:
-                    self.direction = left
-                else:
-                    self.direction = right
+            turn_left = abs(self.pacman.x - self.blinky.x) - 16
+            turn_right = abs(self.pacman.x - self.blinky.x) + 16
+            if turn_left >= turn_right:
+                self.direction = left
+            else:
+                self.direction = right
 
-            elif self.direction == right or self.direction == left:
+        elif self.direction == right or self.direction == left:
 
-                turn_up = abs(self.pacman.y - self.blinky.y + 16)
-                turn_down = abs(self.pacman.y - self.blinky.y - 16)
-                if turn_up <= turn_down:
-                    self.direction = up
-                else:
-                    self.direction = down
+            turn_up = abs(self.pacman.y - self.blinky.y) - 16
+            turn_down = abs(self.pacman.y - self.blinky.y) + 16
+            if turn_up <= turn_down:
+                self.direction = up
+            else:
+                self.direction = down
+        if
 
     def move_straight(self):
         if self.direction == up:
@@ -59,18 +59,24 @@ class Blinky:
             self.blinky.x -= self.speed
 
     def move(self):
+
         if self.check_boarder():
-            self.move_straight()
+             self.move_straight()
         elif self.check_boarder() == 0:
-            self.turn()
+             self.turn()
+        self.__update_system_position()
+
+    def __update_system_position(self):
+        self.blinky.rect.x = self.blinky.x
+        self.blinky.rect.y = self.blinky.y
 
     def draw(self, screen):
         screen.blit(self.blinky.image, self.blinky.rect)
 
-    def image_loop(self):
-        if self.blinky.image == picGhost_Blinky:
-            self.blinky.image == picGhost_Blinky_Move
-        else:
-            self.blinky.image == picGhost_Blinky
+    # def image_loop(self):
+    #     if self.blinky.image == picGhost_Blinky:
+    #         self.blinky.image == picGhost_Blinky_Move
+    #     else:
+    #         self.blinky.image == picGhost_Blinky
 
 

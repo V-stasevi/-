@@ -41,8 +41,8 @@ MATRIX = [[7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13, 7, 5, 5, 5, 5, 5, 5, 5, 5,
               ]
 
 
-ghost_size_x = 16
-ghost_size_y = 16
+ghost_size_x = 15
+ghost_size_y = 15
 
     # ghosts pictures
 picGhost_Blinky = pygame.image.load("images/Ghost-Blinky.png")
