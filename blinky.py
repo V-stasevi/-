@@ -11,9 +11,15 @@ class Blinky:
         self.pacman = pacman
         self.speed = 16
 
-    def check_boarder(self):
-        y = int(self.blinky.y/16)
-        x = int(self.blinky.x/16)
+    def now_x(self):
+        return int(self.blinky.x / 16)
+
+    def now_y(self):
+        return int(self.blinky.y / 16)
+
+    def check_boarder_straight(self):
+        y = self.now_y()
+        x = self.now_x()
         if (self.direction == up and MATRIX[y-1][x] != 0) \
                 or (self.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.direction == right and MATRIX[y][x+1] != 0) \
@@ -25,27 +31,43 @@ class Blinky:
     def set_speed(self, new_speed):
         self.speed = new_speed
 
+    def eat(self):
+        pass
+
+    def death(self):
+        pass
+
     def state(self):
         pass
 
     def turn(self):
+        y = self.now_y()
+        x = self.now_x()
         if self.direction == up or self.direction == down:
-
-            turn_left = abs(self.pacman.x - self.blinky.x) - 16
-            turn_right = abs(self.pacman.x - self.blinky.x) + 16
-            if turn_left <= turn_right:
+            if MATRIX[y][x-1] != 0:
+                self.direction = right
+            elif MATRIX[y][x+1] != 0:
                 self.direction = left
             else:
-                self.direction = right
+                turn_left = abs(self.pacman.x - self.blinky.x - 16)
+                turn_right = abs(self.pacman.x - self.blinky.x + 16)
+                if turn_left <= turn_right:
+                    self.direction = left
+                else:
+                    self.direction = right
 
         elif self.direction == right or self.direction == left:
-
-            turn_up = abs(self.pacman.y - self.blinky.y) - 16
-            turn_down = abs(self.pacman.y - self.blinky.y) + 16
-            if turn_up <= turn_down:
+            if MATRIX[y-1][x] != 0:
+                self.direction = down
+            elif MATRIX[y+1][x] != 0:
                 self.direction = up
             else:
-                self.direction = down
+                turn_up = abs(self.pacman.y - self.blinky.y - 16)
+                turn_down = abs(self.pacman.y - self.blinky.y + 16)
+                if turn_up >= turn_down:
+                    self.direction = up
+                else:
+                    self.direction = down
 
     def move_straight(self):
         if self.direction == up:
@@ -58,11 +80,10 @@ class Blinky:
             self.blinky.x -= self.speed
 
     def move(self):
-
-        if self.check_boarder():
-             self.move_straight()
-        elif self.check_boarder() == 0:
-             self.turn()
+        if self.check_boarder_straight():
+            self.move_straight()
+        elif self.check_boarder_straight() == 0:
+            self.turn()
         self.__update_system_position()
 
     def __update_system_position(self):
