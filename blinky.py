@@ -4,12 +4,8 @@ from constants import picGhost_Blinky, picGhost_Blinky_Move, MATRIX, up, down, r
 class Blinky:
 
     def __init__(self, pacman):
-
-        self.image = picGhost_Blinky
-        self.blinky = Ghost(self.image, 15 * 16 - 32)
-        self.direction = up
+        self.blinky = Ghost(picGhost_Blinky, 15 * 16 - 32)
         self.pacman = pacman
-        self.speed = 16
 
     def now_x(self):
         return int(self.blinky.x / 16)
@@ -20,70 +16,56 @@ class Blinky:
     def check_boarder_straight(self):
         y = self.now_y()
         x = self.now_x()
-        if (self.direction == up and MATRIX[y-1][x] != 0) \
-                or (self.direction == down and MATRIX[y+1][x] != 0) \
-                or (self.direction == right and MATRIX[y][x+1] != 0) \
-                or (self.direction == left and MATRIX[y][x-1] != 0):
+        if (self.blinky.direction == up and MATRIX[y-1][x] != 0) \
+                or (self.blinky.direction == down and MATRIX[y+1][x] != 0) \
+                or (self.blinky.direction == right and MATRIX[y][x+1] != 0) \
+                or (self.blinky.direction == left and MATRIX[y][x-1] != 0):
             return False
         else:
             return True
 
     def set_speed(self, new_speed):
-        self.speed = new_speed
+        self.blinky.speed = new_speed
 
-    def eat(self):
-        pass
-
-    def death(self):
-        pass
-
-    def state(self):
-        pass
+    # def state(self):
+    #     pass
 
     def turn(self):
         y = self.now_y()
         x = self.now_x()
-        if self.direction == up or self.direction == down:
+        if self.blinky.direction == up or self.blinky.direction == down:
             if MATRIX[y][x-1] != 0:
-                self.direction = right
+                self.blinky.direction = right
             elif MATRIX[y][x+1] != 0:
-                self.direction = left
+                self.blinky.direction = left
             else:
                 turn_left = abs(self.pacman.x - self.blinky.x - 16)
                 turn_right = abs(self.pacman.x - self.blinky.x + 16)
                 if turn_left <= turn_right:
-                    self.direction = left
+                    self.blinky.direction = left
                 else:
-                    self.direction = right
+                    self.blinky.direction = right
 
-        elif self.direction == right or self.direction == left:
+        elif self.blinky.direction == right or self.blinky.direction == left:
             if MATRIX[y-1][x] != 0:
-                self.direction = down
+                self.blinky.direction = down
             elif MATRIX[y+1][x] != 0:
-                self.direction = up
+                self.blinky.direction = up
             else:
                 turn_up = abs(self.pacman.y - self.blinky.y - 16)
                 turn_down = abs(self.pacman.y - self.blinky.y + 16)
                 if turn_up >= turn_down:
-                    self.direction = up
+                    self.blinky.direction = up
                 else:
-                    self.direction = down
-
-    def move_straight(self):
-        if self.direction == up:
-            self.blinky.y -= self.speed
-        elif self.direction == down:
-            self.blinky.y += self.speed
-        elif self.direction == right:
-            self.blinky.x += self.speed
-        elif self.direction == left:
-            self.blinky.x -= self.speed
+                    self.blinky.direction = down
+        self.blinky.move_straight()
 
     def move(self):
         if self.check_boarder_straight():
-            self.move_straight()
+            self.blinky.move_straight()
         elif self.check_boarder_straight() == 0:
             self.turn()
+        # self.blinky.collision(picGhost_Blinky)
         self.__update_system_position()
 
     def __update_system_position(self):
