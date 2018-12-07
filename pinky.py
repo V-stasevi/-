@@ -5,16 +5,16 @@ from constants import down, up, MATRIX, right, left, picGhost_Pinky, picGhost_Pi
 class Pinky:
 
     def __init__(self, pacman):
-        self.pinky = Ghost(picGhost_Pinky, 15 * 16 + 0)
-        self.direction = down
+        self.pinky = Ghost(picGhost_Pinky, 15 * 16 - 16)
+        self.direction = up
         self.pacman = pacman
         self.speed = 16
 
     def check_boarder(self):
         y = int(self.pinky.y/16)
         x = int(self.pinky.x/16)
-        if (self.direction == up and MATRIX[y+1][x] != 0) \
-                or (self.direction == down and MATRIX[y-1][x] != 0) \
+        if (self.direction == up and MATRIX[y-1][x] != 0) \
+                or (self.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.direction == right and MATRIX[y][x+1] != 0) \
                 or (self.direction == left and MATRIX[y][x-1] != 0):
             return False
@@ -24,6 +24,12 @@ class Pinky:
     def set_speed(self, new_speed):
         self.speed = new_speed
 
+    def eat(self):
+        pass
+
+    def death(self):
+        pass
+
     def state(self):
         pass
 
@@ -32,8 +38,8 @@ class Pinky:
         if self.direction == up or self.direction == down:
 
             turn_left = abs(self.pacman.x + 4 - self.pinky.x - 16)
-            turn_right = abs(self.pacman.x + 4- self.pinky.x + 16)
-            if turn_left >= turn_right:
+            turn_right = abs(self.pacman.x + 4 - self.pinky.x + 16)
+            if turn_left <= turn_right:
                 self.direction = left
             else:
                 self.direction = right
@@ -49,9 +55,9 @@ class Pinky:
 
     def move_straight(self):
         if self.direction == up:
-            self.pinky.y += self.speed
-        elif self.direction == down:
             self.pinky.y -= self.speed
+        elif self.direction == down:
+            self.pinky.y += self.speed
         elif self.direction == right:
             self.pinky.x += self.speed
         elif self.direction == left:

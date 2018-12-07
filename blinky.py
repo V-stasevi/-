@@ -7,15 +7,15 @@ class Blinky:
 
         self.image = picGhost_Blinky
         self.blinky = Ghost(self.image, 15 * 16 - 32)
-        self.direction = down
+        self.direction = up
         self.pacman = pacman
         self.speed = 16
 
     def check_boarder(self):
         y = int(self.blinky.y/16)
         x = int(self.blinky.x/16)
-        if (self.direction == up and MATRIX[y+1][x] != 0) \
-                or (self.direction == down and MATRIX[y-1][x] != 0) \
+        if (self.direction == up and MATRIX[y-1][x] != 0) \
+                or (self.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.direction == right and MATRIX[y][x+1] != 0) \
                 or (self.direction == left and MATRIX[y][x-1] != 0):
             return False
@@ -33,7 +33,7 @@ class Blinky:
 
             turn_left = abs(self.pacman.x - self.blinky.x) - 16
             turn_right = abs(self.pacman.x - self.blinky.x) + 16
-            if turn_left >= turn_right:
+            if turn_left <= turn_right:
                 self.direction = left
             else:
                 self.direction = right
@@ -46,13 +46,12 @@ class Blinky:
                 self.direction = up
             else:
                 self.direction = down
-        if
 
     def move_straight(self):
         if self.direction == up:
-            self.blinky.y += self.speed
-        elif self.direction == down:
             self.blinky.y -= self.speed
+        elif self.direction == down:
+            self.blinky.y += self.speed
         elif self.direction == right:
             self.blinky.x += self.speed
         elif self.direction == left:
