@@ -14,6 +14,7 @@ class Score:
     def checkScore(self):
         if self.count == 70:
             self.matrix.matrix[22][12].isFruit = True
+            self.matrix.matrix[22][12].fruitCount += 1
             self.matrix.matrix[6][6].fruitCount += 1
             self.count += 1
         if self.count == 170:

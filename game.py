@@ -27,7 +27,7 @@ class Game:
         self.score = Score(15, 35, self.screen, self.field)
 
 
-        # self.prepare_scene()
+        self.prepare_scene()
 
         self.dict_functions = {"sound_control": self.turn_off_music,
                                 "level_control": self.change_game_level,
@@ -35,6 +35,12 @@ class Game:
                           }
 
         self.settings_control = ButtonControl(self.screen, self.dict_functions)
+
+    def prepare_scene(self):
+        self.field.matrix[3][1].isBig = True
+        self.field.matrix[23][1].isBig = True
+        self.field.matrix[23][26].isBig = True
+        self.field.matrix[3][26].isBig = True
 
     def main_loop(self):
         self.sounds.playIntroSound()
@@ -100,6 +106,7 @@ class Game:
             print("change level to 3")
         else:
             print("hmmm, unexpected level")
+
 
 
     def clear_records(self, result):

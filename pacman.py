@@ -117,6 +117,11 @@ class Pacman:
                 self.matrix[self.y // 16][self.x // 16].cherry.is_eaten = True
                 score.points += 50
 
+        if self.matrix[self.y//16][self.x//16].isBig == True:
+            if self.matrix[self.y // 16][self.x // 16].energizer.is_eaten == False:
+                self.matrix[self.y // 16][self.x // 16].energizer.is_eaten = True
+                score.points += 50
+
 
 
     def logic(self, score):

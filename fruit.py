@@ -12,11 +12,6 @@ class Cherry:
         self.is_eaten = False
         self.points = 100        # Кол-во очков
 
-    def eat(self, pacman_rect):
-        if not self.is_eaten and self.rect.colliderect(pacman_rect):
-            self.is_eaten = True
-            return self.points
-
     def draw(self, screen):
         if not self.is_eaten:
             screen.blit(self.image, self.rect)
