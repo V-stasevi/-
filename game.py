@@ -1,12 +1,14 @@
 import pygame
 from settings_control import ButtonControl
 
-from constants import SIZE, BLACK, SIZE_B
+from constants import SIZE, BLACK, SIZE_B,  picGhost_Clyde, picGhost_Inky
 from pacman import Pacman
 from field import Field
 import Menu
 import constants as cm
 from score import Score
+from blinky import Blinky
+from pinky import Pinky
 
 from sound_system import Sounds
 
@@ -17,17 +19,18 @@ class Game:
         self.gameover = False
         self.isMenu = True
         self.objects = []
-        self.score = -40
 
         self.sounds = Sounds()
         self.menu = Menu.Menu(self.screen, cm.pic_play, cm.pic_records, cm.pic_options, cm.pic_bg, self.runGame,
                               self.showScore, self.showOption)
         self.field = Field(0, 0, 15)
+
         self.pacman = Pacman(self.field.matrix, self.sounds)
         self.score = Score(15, 35, self.screen, self.field)
 
-
         self.prepare_scene()
+
+        self.startTime = None
 
         self.dict_functions = {"sound_control": self.turn_off_music,
                                 "level_control": self.change_game_level,
@@ -41,6 +44,10 @@ class Game:
         self.field.matrix[23][1].isBig = True
         self.field.matrix[23][26].isBig = True
         self.field.matrix[3][26].isBig = True
+
+
+        self.Blinky = Blinky(self.pacman)   # добавление Блинки
+        self.Pinky = Pinky(self.pacman)   # добавление Пинки
 
     def main_loop(self):
         self.sounds.playIntroSound()
@@ -60,10 +67,16 @@ class Game:
                 self.menu.events(event)
 
     def process_logic(self):
-        if self.isMenu:
+        if self.isMenu or self.pacman.isGameOver:
             pass
         else:
+            if self.startTime == None:
+                self.startTime = pygame.time.get_ticks()
             self.pacman.logic(self.score)
+            if (pygame.time.get_ticks() - self.startTime)//1000 >= 2:
+                self.Blinky.move(self.pacman)
+            if (pygame.time.get_ticks() - self.startTime) // 1000 >= 5:
+                self.Pinky.move(self.pacman)
 
     def process_drawing(self):
         self.screen.fill(BLACK)
@@ -72,8 +85,9 @@ class Game:
         else:
             self.field.draw(self.screen)
             self.pacman.draw(self.screen)
+            self.Blinky.draw(self.screen)
+            self.Pinky.draw(self.screen)
             self.score.draw()
-
         pygame.display.flip()
 
     def pacman_rect(self):

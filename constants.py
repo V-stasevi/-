@@ -55,33 +55,46 @@ MATRIX = [[7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13, 7, 5, 5, 5, 5, 5, 5, 5, 5,
               ]
 
 
-
+ghost_size_x = 15
+ghost_size_y = 15
 
     # ghosts pictures
-picGhost_Blinky = "images/Ghost-Blinky.png"
-picGhost_Clyde = "images/Ghost-Clyde.png"
-picGhost_Inky = "images/Ghost-Inky.png"
-picGhost_Pinky = "images/Ghost-Pinky.png"
-picGhost_Dead = "images/Ghost-dead.png"
+picGhost_Blinky = pygame.image.load("textures/Ghost-Blinky.png")
+picGhost_Blinky = pygame.transform.scale(picGhost_Blinky, (ghost_size_x, ghost_size_y))
+picGhost_Clyde = pygame.image.load("textures/Ghost-Clyde.png")
+picGhost_Clyde = pygame.transform.scale(picGhost_Clyde, (ghost_size_x, ghost_size_y))
+picGhost_Inky = pygame.image.load("textures/Ghost-Inky.png")
+picGhost_Inky = pygame.transform.scale(picGhost_Inky, (ghost_size_x, ghost_size_y))
+picGhost_Pinky = pygame.image.load("textures/Ghost-pinky.png")
+picGhost_Pinky = pygame.transform.scale(picGhost_Pinky, (ghost_size_x, ghost_size_y))
+picGhost_Dead = pygame.image.load("textures/Ghost-dead.png")
+picGhost_Dead = pygame.transform.scale(picGhost_Dead, (ghost_size_x, ghost_size_y))
 
     # moving ghosts pictures
-picGhost_Blinky_Move = "images/Ghost-Blinky-move.png"
-picGhost_Clyde_Move = "images/Ghost-Clyde-move.png"
-picGhost_Inky_Move = "images/Ghost-Inky-move.png"
-picGhost_Pinky_Move = "images/Ghost-Pinky-move.png"
-picGhost_Dead_Move = "images/Ghost-dead-move.png"
+picGhost_Blinky_Move = "textures/Ghost-Blinky-move.png"
+picGhost_Clyde_Move = "textures/Ghost-Clyde-move.png"
+picGhost_Inky_Move = "textures/Ghost-Inky-move.png"
+picGhost_Pinky_Move = "textures/Ghost-Pinky-move.png"
+picGhost_Dead_Move = "textures/Ghost-dead-move.png"
+
 
 x_play, y_play = WIDTH/2, HEIGHT/5 * 2
 x_records, y_records = WIDTH/2, HEIGHT/5 * 3
 x_options, y_options = WIDTH/2, HEIGHT/5 * 4
 pic_play, pic_records, pic_options, pic_bg = "textures/Play.png", "textures/Records.png", "textures/Options.png", "textures/Menu.png"
-pic_arr = "images/Ar.png"
+pic_arr = "textures/Ar.png"
 
 
 BUTTON_STYLE = {
                 "font" : pygame.font.SysFont("Alice", 18),
                 "hover_color" : GRAY,
                 }
+
+right = 0
+down = 1
+left = 2
+up = 3
+
 
 cherryTexture = "textures/Ghost-Inky.png"
 strawberryTexture = "textures/big_seed.png"

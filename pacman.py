@@ -18,7 +18,8 @@
 """
 
 import pygame
-from constants import WIDTH, HEIGHT, MATRIX, POINTS_FOR_SEED
+from constants import WIDTH_B as WIDTH, HEIGHT_B as HEIGHT, MATRIX
+from text import Text
 
 pac_right = "pac-img.png"  # !! Временные картинки Пакмана. НУЖНО ЗАМЕНИТЬ
 pac_left = "pac-img.png"
@@ -40,6 +41,9 @@ class Pacman:
         self.state = common
         self.matrix = mat
         self.sounds = sounds
+
+        self.isGameOver = False
+        self.textGameOver = Text(WIDTH//4, 16*14, "GAME OVER", size=52, color=(255, 0, 255))
 
     def __update_system_position(self):
         self.rect.x = self.x
@@ -132,3 +136,15 @@ class Pacman:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+        if self.isGameOver:
+            self.textGameOver.draw(screen)
+
+    def is_dead(self):
+        self.x = 14*16+2
+        self.y = 15*16
+        self.__update_system_position()
+        self.direction = 0
+
+    def gameOver(self):
+        self.isGameOver = True
+        print('gameover')
