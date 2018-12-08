@@ -13,8 +13,8 @@ class Button:
             pos_x = self.pic_rec.x
             pos_y = self.pic_rec.y
             xm, ym = pg.mouse.get_pos()
-            if (pos_x <= xm <= pos_x + self.pic_rec.width) and (
-                    pos_y <= ym <= pos_y + self.pic_rec.height):
+            if (pos_x - 25 <= xm <= pos_x + self.pic_rec.width + 25) and (
+                    pos_y - 25 <= ym <= pos_y + self.pic_rec.height + 25):
                 f.b_function(self.button)
 
     def draw(self, screen):
