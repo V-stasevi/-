@@ -111,3 +111,9 @@ class Pacman:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+
+    def is_dead(self):
+        self.x = 14*16+2
+        self.y = 15*16
+        self.__update_system_position()
+        self.direction = 0
