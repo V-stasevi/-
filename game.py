@@ -24,7 +24,7 @@ class Game:
                               self.showScore, self.showOption)
         self.field = Field(0, 0, 15)
         self.pacman = Pacman(self.field.matrix, self.sounds)
-        self.score = Score(15, 35, self.screen)
+        self.score = Score(15, 35, self.screen, self.field)
 
 
         # self.prepare_scene()
@@ -58,7 +58,6 @@ class Game:
             pass
         else:
             self.pacman.logic(self.score)
-            print(self.score.pointsGrains)
 
     def process_drawing(self):
         self.screen.fill(BLACK)
@@ -69,8 +68,6 @@ class Game:
             self.pacman.draw(self.screen)
             self.score.draw()
 
-        #for item in self.ghosts:
-            #item.draw(self.screen)
         pygame.display.flip()
 
     def pacman_rect(self):

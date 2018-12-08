@@ -108,9 +108,16 @@ class Pacman:
     def eatGrain(self, score):
         if self.matrix[self.y//16][self.x//16].grain.isEaten == False:
             self.matrix[self.y//16][self.x//16].grain.isEaten = True
-            if score != 3000:
-                score.pointsGrains += POINTS_FOR_SEED
+            if score.count != 300:
+                score.logic()
                 self.sounds.playEatSeedSound()
+
+        if self.matrix[self.y//16][self.x//16].isFruit == True:
+            if self.matrix[self.y // 16][self.x // 16].cherry.is_eaten == False:
+                self.matrix[self.y // 16][self.x // 16].cherry.is_eaten = True
+                score.points += 50
+
+
 
     def logic(self, score):
         self.check_cash()

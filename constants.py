@@ -82,3 +82,6 @@ BUTTON_STYLE = {
                 "font" : pygame.font.SysFont("Alice", 18),
                 "hover_color" : GRAY,
                 }
+
+cherryTexture = "textures/Ghost-Inky.png"
+strawberryTexture = "textures/big_seed.png"
