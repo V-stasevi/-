@@ -36,8 +36,8 @@ class Blinky:
                 or (self.blinky.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.blinky.direction == right and MATRIX[y][x+1] != 0) \
                 or (self.blinky.direction == left and MATRIX[y][x-1] != 0):
-            if ((self.blinky.direction == up or self.blinky.direction == down) and y != self.pacman.y) \
-                    or ((self.blinky.direction == left or self.blinky.direction == right) and x != self.pacman.x):
+            if ((self.blinky.direction == up or self.blinky.direction == down) and y != int(self.pacman.y/16)) \
+                    or ((self.blinky.direction == left or self.blinky.direction == right) and x != int(self.pacman.x/16)):
                 self.turn()
         else:
             self.blinky.move_straight()
@@ -80,11 +80,6 @@ class Blinky:
 
     def move(self):
         self.check_border_sides()
-        # if self.check_boarder_straight():
-        #     self.blinky.move_straight()
-        # elif self.check_boarder_straight() == 0:
-        #     self.turn()
-        # self.blinky.collision(picGhost_Blinky)
         self.__update_system_position()
 
     def __update_system_position(self):
@@ -99,5 +94,3 @@ class Blinky:
     #         self.blinky.image == picGhost_Blinky_Move
     #     else:
     #         self.blinky.image == picGhost_Blinky
-
-

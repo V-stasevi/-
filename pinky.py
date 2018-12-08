@@ -13,11 +13,9 @@ class Pinky:
     def now_y(self):
         return int(self.pinky.y/16)
 
-
     def check_border_sides(self):
         y = self.now_y()
         x = self.now_x()
-
         if (x > 11 and x < 18) and (y > 11 and y < 17):
             self.pinky.start()
         else:
@@ -38,8 +36,8 @@ class Pinky:
                 or (self.pinky.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.pinky.direction == right and MATRIX[y][x+1] != 0) \
                 or (self.pinky.direction == left and MATRIX[y][x-1] != 0):
-            if ((self.pinky.direction == up or self.pinky.direction == down) and y != self.pacman.y) \
-                    or ((self.pinky.direction == left or self.pinky.direction == right) and x != self.pacman.x):
+            if ((self.pinky.direction == up or self.pinky.direction == down) and y != int(self.pacman.y/16)) \
+                    or ((self.pinky.direction == left or self.pinky.direction == right) and x != int(self.pacman.x/16)):
                 self.turn()
         else:
             self.pinky.move_straight()
@@ -82,11 +80,6 @@ class Pinky:
 
     def move(self):
         self.check_border_sides()
-        # if self.check_boarder_straight():
-        #     self.pinky.move_straight()
-        # elif self.check_boarder_straight() == 0:
-        #     self.turn()
-        # self.pinky.collision(picGhost_Pinky)
         self.__update_system_position()
 
     def __update_system_position(self):
