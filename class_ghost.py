@@ -19,6 +19,9 @@ class Ghost:
         self.rect.x = self.x
         self.rect.y = self.y
 
+    def start(self):
+        self.y -= self.speed
+
     def move(self):
         pass
 

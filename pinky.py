@@ -1,7 +1,6 @@
 from class_ghost import Ghost
 from constants import down, up, MATRIX, right, left, picGhost_Pinky, picGhost_Pinky_Move
 
-
 class Pinky:
 
     def __init__(self, pacman):
@@ -14,18 +13,23 @@ class Pinky:
     def now_y(self):
         return int(self.pinky.y/16)
 
+
     def check_border_sides(self):
         y = self.now_y()
         x = self.now_x()
-        if (self.pinky.direction == up or self.pinky.direction == down) \
-                and (MATRIX[y][x+1] != 0 and MATRIX[y][x-1] != 0):
-            self.check_boarder_straight()
-        elif (self.pinky.direction == left or self.pinky.direction == right) \
-                and (MATRIX[y+1][x] != 0 and MATRIX[y-1][x] != 0):
-            self.check_boarder_straight()
 
+        if (x > 11 and x < 18) and (y > 11 and y < 17):
+            self.pinky.start()
         else:
-            self.turn()
+            if (self.pinky.direction == up or self.pinky.direction == down) \
+                    and (MATRIX[y][x+1] != 0 and MATRIX[y][x-1] != 0):
+                self.check_boarder_straight()
+            elif (self.pinky.direction == left or self.pinky.direction == right) \
+                    and (MATRIX[y+1][x] != 0 and MATRIX[y-1][x] != 0):
+                self.check_boarder_straight()
+
+            else:
+                self.turn()
 
     def check_boarder_straight(self):
         y = self.now_y()
@@ -34,9 +38,11 @@ class Pinky:
                 or (self.pinky.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.pinky.direction == right and MATRIX[y][x+1] != 0) \
                 or (self.pinky.direction == left and MATRIX[y][x-1] != 0):
-            return False
+            if ((self.pinky.direction == up or self.pinky.direction == down) and y != self.pacman.y) \
+                    or ((self.pinky.direction == left or self.pinky.direction == right) and x != self.pacman.x):
+                self.turn()
         else:
-            return True
+            self.pinky.move_straight()
 
     def set_speed(self, new_speed):
         self.pinky.speed = new_speed
@@ -55,7 +61,7 @@ class Pinky:
             else:
                 turn_left = abs(self.pacman.x + 4*16 - self.pinky.x - 16)
                 turn_right = abs(self.pacman.x + 4*16 - self.pinky.x + 16)
-                if turn_left <= turn_right:
+                if turn_left >= turn_right:
                     self.pinky.direction = left
                 else:
                     self.pinky.direction = right
@@ -75,10 +81,11 @@ class Pinky:
         self.pinky.move_straight()
 
     def move(self):
-        if self.check_boarder_straight():
-            self.pinky.move_straight()
-        elif self.check_boarder_straight() == 0:
-            self.turn()
+        self.check_border_sides()
+        # if self.check_boarder_straight():
+        #     self.pinky.move_straight()
+        # elif self.check_boarder_straight() == 0:
+        #     self.turn()
         # self.pinky.collision(picGhost_Pinky)
         self.__update_system_position()
 

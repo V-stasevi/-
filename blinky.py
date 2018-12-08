@@ -13,6 +13,22 @@ class Blinky:
     def now_y(self):
         return int(self.blinky.y / 16)
 
+    def check_border_sides(self):
+        y = self.now_y()
+        x = self.now_x()
+        if (x > 11 and x < 18) and (y > 11 and y < 17):
+            self.blinky.start()
+        else:
+            if (self.blinky.direction == up or self.blinky.direction == down) \
+                    and (MATRIX[y][x+1] != 0 and MATRIX[y][x-1] != 0):
+                self.check_boarder_straight()
+            elif (self.blinky.direction == left or self.blinky.direction == right) \
+                    and (MATRIX[y+1][x] != 0 and MATRIX[y-1][x] != 0):
+                self.check_boarder_straight()
+
+            else:
+                self.turn()
+
     def check_boarder_straight(self):
         y = self.now_y()
         x = self.now_x()
@@ -20,9 +36,11 @@ class Blinky:
                 or (self.blinky.direction == down and MATRIX[y+1][x] != 0) \
                 or (self.blinky.direction == right and MATRIX[y][x+1] != 0) \
                 or (self.blinky.direction == left and MATRIX[y][x-1] != 0):
-            return False
+            if ((self.blinky.direction == up or self.blinky.direction == down) and y != self.pacman.y) \
+                    or ((self.blinky.direction == left or self.blinky.direction == right) and x != self.pacman.x):
+                self.turn()
         else:
-            return True
+            self.blinky.move_straight()
 
     def set_speed(self, new_speed):
         self.blinky.speed = new_speed
@@ -41,7 +59,7 @@ class Blinky:
             else:
                 turn_left = abs(self.pacman.x - self.blinky.x - 16)
                 turn_right = abs(self.pacman.x - self.blinky.x + 16)
-                if turn_left <= turn_right:
+                if turn_left >= turn_right:
                     self.blinky.direction = left
                 else:
                     self.blinky.direction = right
@@ -61,10 +79,11 @@ class Blinky:
         self.blinky.move_straight()
 
     def move(self):
-        if self.check_boarder_straight():
-            self.blinky.move_straight()
-        elif self.check_boarder_straight() == 0:
-            self.turn()
+        self.check_border_sides()
+        # if self.check_boarder_straight():
+        #     self.blinky.move_straight()
+        # elif self.check_boarder_straight() == 0:
+        #     self.turn()
         # self.blinky.collision(picGhost_Blinky)
         self.__update_system_position()
 
