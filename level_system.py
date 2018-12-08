@@ -16,7 +16,7 @@ class level_system:
         elif self.level== 2:
             self.speeds= 20
             return self.speeds
-        else self.level== 3:
+        elif self.level== 3:
             self.speeds= 30
             return self.speeds
         
