@@ -45,9 +45,9 @@ class Field:
         self.x = x
         self.y = y
         self.cell_size = cell_size
-        self.matrix = self.__create_matrix()
+        self.matrix = self.create_matrix()
 
-    def __create_matrix(self):
+    def create_matrix(self):
         for i in range(self.v_cells):
             for j in range(self.h_cells):
                 cell_x = self.x + j * (self.cell_size + 1)

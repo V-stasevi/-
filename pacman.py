@@ -43,7 +43,6 @@ class Pacman:
         self.sounds = sounds
 
         self.isGameOver = False
-        self.textGameOver = Text(WIDTH//4, 16*14, "GAME OVER", size=52, color=(255, 0, 255))
 
         self.startTime = None
 
@@ -145,8 +144,6 @@ class Pacman:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
-        if self.isGameOver:
-            self.textGameOver.draw(screen)
 
     def is_dead(self):
         self.x = 14*16+2
