@@ -33,7 +33,7 @@ MATRIX = [[7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 13, 7, 5, 5, 5, 5, 5, 5, 5, 5,
               [16, 9, 9, 9, 9, 14, 0, 10, 3, 4, 4, 6, 0, 10, 10, 0, 2, 4, 4, 8, 10, 0, 18, 9, 9, 9, 9, 17],
               [0, 0, 0, 0, 0, 12, 0, 10, 2, 4, 4, 8, 0, 3, 8, 0, 3, 4, 4, 6, 10, 0, 11, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 12, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 0, 11, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 12, 0, 10, 10, 0, 2, 4, 4, 0, 0, 4, 4, 6, 0, 10, 10, 0, 11, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 12, 0, 10, 10, 0, 2, 4, 4, 0, 0, 4, 4, 6, 0, 10, 10, 0, 11, 0, 0, 0, 0, 0], #
               [5, 5, 5, 5, 5, 15, 0, 3, 8, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 3, 8, 0, 19, 5, 5, 5, 5, 5],
               [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
               [9, 9, 9, 9, 9, 14, 0, 2, 6, 0, 10, 0, 0, 0, 0, 0, 0, 10, 0, 2, 6, 0, 18, 9, 9, 9, 9, 9],
@@ -77,6 +77,10 @@ picGhost_Inky_Move = "textures/Ghost-Inky-move.png"
 picGhost_Pinky_Move = "textures/Ghost-Pinky-move.png"
 picGhost_Dead_Move = "textures/Ghost-dead-move.png"
 
+pacman_left = pygame.image.load("textures/pacman-left.png")
+pacman_right = pygame.image.load("textures/pacman-right.png")
+pacman_down = pygame.image.load("textures/pacman-down.png")
+pacman_up = pygame.image.load("textures/pacman-up.png")
 
 x_play, y_play = WIDTH/2, HEIGHT/5 * 2
 x_records, y_records = WIDTH/2, HEIGHT/5 * 3
@@ -96,5 +100,5 @@ left = 2
 up = 3
 
 
-cherryTexture = "textures/Ghost-Inky.png"
-strawberryTexture = "textures/big_seed.png"
+cherryTexture = "textures/Strawberry.png"
+strawberryTexture = "textures/Strawberry.png"

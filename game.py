@@ -1,4 +1,6 @@
 import pygame
+
+from clyde import Clyde
 from settings_control import ButtonControl
 
 from constants import SIZE, BLACK, SIZE_B,  picGhost_Clyde, picGhost_Inky
@@ -9,6 +11,7 @@ import constants as cm
 from score import Score
 from blinky import Blinky
 from pinky import Pinky
+from inky import Inky
 
 from sound_system import Sounds
 
@@ -48,6 +51,8 @@ class Game:
 
         self.Blinky = Blinky(self.pacman)   # добавление Блинки
         self.Pinky = Pinky(self.pacman)   # добавление Пинки
+        self.Inky = Inky(self.field.matrix)
+        self.Clyde = Clyde(self.field.matrix)
 
     def main_loop(self):
         self.sounds.playIntroSound()
@@ -74,9 +79,16 @@ class Game:
                 self.startTime = pygame.time.get_ticks()
             self.pacman.logic(self.score)
             if (pygame.time.get_ticks() - self.startTime)//1000 >= 2:
-                self.Blinky.move(self.pacman)
-            if (pygame.time.get_ticks() - self.startTime) // 1000 >= 5:
-                self.Pinky.move(self.pacman)
+                self.Blinky.move(self.pacman, self.score)
+            if (pygame.time.get_ticks() - self.startTime) // 1000 >= 4:
+                self.Pinky.move(self.pacman, self.score)
+
+            if self.score.count == 120:
+                self.Clyde.y = 11*16
+            if self.score.count >= 120:
+                self.Clyde.process_logic(self.pacman, self.score)
+            if self.score.count >= 50:
+                self.Inky.process_logic(self.pacman, self.score)
 
     def process_drawing(self):
         self.screen.fill(BLACK)
@@ -87,6 +99,8 @@ class Game:
             self.pacman.draw(self.screen)
             self.Blinky.draw(self.screen)
             self.Pinky.draw(self.screen)
+            self.Clyde.draw(self.screen)
+            self.Inky.draw(self.screen)
             self.score.draw()
         pygame.display.flip()
 

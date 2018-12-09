@@ -6,6 +6,7 @@ common = True
 class Ghost:
     def __init__(self, picture, x):
         self.image = picture
+        self.normalState = picture
         self.rect = self.image.get_rect()
         self.x = x
         self.y = 15*16
@@ -14,6 +15,7 @@ class Ghost:
         self.__update_system_position()
         self.speed = 16
         self.dead = False
+        self.startTime = pygame.time.get_ticks()
 
     def __update_system_position(self):
         self.rect.x = self.x
@@ -26,6 +28,7 @@ class Ghost:
         pass
 
     def move_straight(self):
+        self.__update_system_position()
         if self.direction == up:
             self.y -= self.speed
         elif self.direction == down:
@@ -39,16 +42,25 @@ class Ghost:
         self.__update_system_position()
 
     def is_dead(self):
-        self.image = pygame.image.load(picGhost_Dead)            #pacman.rect нужно нормльно привязать
+        self.image = picGhost_Dead            #pacman.rect нужно нормльно привязать
         self.direction = up
         self.x = 15 * 16 - 16
         self.y = 15 * 16
         self.__update_system_position()
 
-    def collision(self, pacman):
+
+    def retcom(self):
+        self.image = self.normalState
+
+    def collision(self, pacman, score):
         if self.rect.colliderect(pacman.rect) and pacman.state == common:
             pacman.gameOver()
-        else:
+
+        if self.rect.colliderect(pacman.rect) and pacman.state != common:
             self.state = False
-            print('col')
-                                                           #pacman.rect и pacman.is_dead!
+            score.addGhostPoints()
+            self.is_dead()
+
+        if pacman.state == common:
+            self.state = common
+            self.retcom()

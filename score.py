@@ -6,6 +6,7 @@ from constants import WHITE, HEIGHT_B, POINTS_FOR_SEED
 class Score:
     def __init__(self, x, y, screen, matrix):
         self.count = 0
+        self.countGhost = 1
         self.points = 0
         self.scoreText = Text(x, HEIGHT_B - y, "Score: " + str(self.points))
         self.screen = screen
@@ -25,6 +26,9 @@ class Score:
         self.points += POINTS_FOR_SEED
         self.count += 1
         self.checkScore()
+
+    def addGhostPoints(self):
+        self.points += 400*self.countGhost
 
     def draw(self):
         self.scoreText.updateText("Score: " + str(self.points))

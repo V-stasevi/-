@@ -60,13 +60,13 @@ class Blinky:
                     self.blinky.direction = down
         self.blinky.move_straight()
 
-    def move(self, pacman):
+    def move(self, pacman, score):
         if self.check_boarder_straight():
             self.blinky.move_straight()
         elif self.check_boarder_straight() == 0:
             self.turn()
 
-        self.blinky.collision(pacman)
+        self.blinky.collision(pacman, score)
 
         self.__update_system_position()
 
